@@ -1,0 +1,18 @@
+ext {
+
+    libsVersion = [
+            gson = "2.8.6",
+            smartRefreshLayout = "1.1.0",
+            smartRefreshHeader = "1.1.0"
+    ]
+
+    dependencies = [
+            smartRefreshLayout: "com.scwang.smartrefresh:SmartRefreshLayout:$rootProject.smartRefreshLayout",  //1.0.5及以前版本的老用户升级需谨慎，API改动过大
+            smartRefreshHeader: "com.scwang.smartrefresh:SmartRefreshHeader:$rootProject.smartRefreshHeader",  //没有使用特殊Header，可以不加这行
+            gson              : "com.google.code.gson:gson:$rootProject.gson",
+            glide             : "com.github.bumptech.glide:glide:4.10.0",
+            glideComplier     : "com.github.bumptech.glide:compiler:4.10.0",
+            supportDesign     : "com.android.support:design:27.1.1",
+            okhttp            : "com.squareup.okhttp3:okhttp:4.2.1"
+    ]
+}
