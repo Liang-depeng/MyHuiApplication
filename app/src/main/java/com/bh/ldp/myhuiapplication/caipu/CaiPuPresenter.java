@@ -1,12 +1,13 @@
 package com.bh.ldp.myhuiapplication.caipu;
 
+import androidx.annotation.NonNull;
+
 import com.bh.ldp.lib_base.basev.BasePresenter;
 import com.bh.ldp.lib_base.http.HttpHelper;
 import com.bh.ldp.lib_base.http.HttpUrl;
 import com.bh.ldp.lib_base.http.OnHttpResponseListner;
 import com.bh.ldp.lib_base.http.RequestParams;
 
-import androidx.annotation.NonNull;
 import bean.CaiPuBean;
 import bean.SortListBean;
 
@@ -15,10 +16,11 @@ import bean.SortListBean;
  */
 public class CaiPuPresenter extends BasePresenter<CaiPuContract.View> implements CaiPuContract.Presenter, OnHttpResponseListner {
 
-    private HttpHelper mHttpHelper = new HttpHelper(this);
+    private HttpHelper mHttpHelper = HttpHelper.getInstance();
 
     public CaiPuPresenter(CaiPuContract.View mView) {
         super(mView);
+        mHttpHelper.setCallBack(this);
     }
 
     @Override

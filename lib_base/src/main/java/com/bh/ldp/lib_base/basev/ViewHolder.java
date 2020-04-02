@@ -7,9 +7,12 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.StringRes;
+
+import com.bh.ldp.lib_base.R;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import androidx.annotation.StringRes;
 
 /**
  * created by Da Peng at 2019/7/30
@@ -230,9 +233,25 @@ public class ViewHolder{
         return this;
     }
 
+    public ViewHolder setImagineByNetUrl(Context context, int viewId, String netResUrl) {
+        ImageView imageView = getView(viewId);
+        glideToImagine(context, imageView, netResUrl);
+        return this;
+    }
+
     private void glideToImagine(Context context, ImageView image, String netResUrl, int placeholder) {
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(placeholder)
+                .fitCenter();
+        //      .error(errorImagineId)    , int errorImagineId
+        Glide.with(context).load(netResUrl)
+                .apply(requestOptions)
+                .into(image);
+    }
+
+    private void glideToImagine(Context context, ImageView image, String netResUrl) {
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.mipmap.ic_load_failed_1)
                 .fitCenter();
         //      .error(errorImagineId)    , int errorImagineId
         Glide.with(context).load(netResUrl)

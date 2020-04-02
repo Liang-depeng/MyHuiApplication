@@ -1,6 +1,5 @@
 package com.bh.ldp.lib_base.http;
 
-import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
@@ -38,9 +37,21 @@ public class HttpHelper {
     private OnHttpResponseListner listener;
     private Handler mHandler;
 
-    public HttpHelper(OnHttpResponseListner listener) {
-        this.listener = listener;
+    private HttpHelper() {
         this.mHandler = new Handler(Looper.getMainLooper());
+        this.okHttpClient = new OkHttpClient();
+    }
+
+    public static HttpHelper getInstance() {
+        return HttpHolder.INSTANCE;
+    }
+
+    public void setCallBack(OnHttpResponseListner listener){
+        this.listener = listener;
+    }
+
+    private static class HttpHolder {
+        private static final HttpHelper INSTANCE = new HttpHelper();
     }
 
     /**
@@ -51,7 +62,7 @@ public class HttpHelper {
     public void startRequest(final RequestParams requestParams) {
 
         // 第一步获取okHttpClient对象
-        okHttpClient = new OkHttpClient();
+       // okHttpClient = new OkHttpClient();
 
         // 第二步构建Request对象
         Request request = new Request.Builder()
@@ -68,7 +79,6 @@ public class HttpHelper {
             urls.append(body.encodedName(i)).append("=").append(body.encodedValue(i));
         }
 
-
         Log.e("httpUrl", "\n" + urls);
 
         //第三步构建Call对象
@@ -81,7 +91,7 @@ public class HttpHelper {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        listener.onFailed(requestParams,"请求失败");
+                        listener.onFailed(requestParams, "请求失败");
                     }
                 });
             }
@@ -124,7 +134,7 @@ public class HttpHelper {
             public void run() {
                 try {
                     if (TextUtils.equals(jsonObject.optString("result"), "")) {
-                        requestSuccessNoDataError(requestParams,jsonObject);
+                        requestSuccessNoDataError(requestParams, jsonObject);
                     } else {
                         requestSuccess(requestParams, jsonObject);
                     }
@@ -141,22 +151,23 @@ public class HttpHelper {
     private void requestSuccess(RequestParams requestParams, JSONObject jsonObject) {
         if (requestParams.getParseClass() != null) {
             Object object = new Gson().fromJson(jsonObject.toString(), requestParams.getParseClass());
-            listener.onSuccess(requestParams,object);
+            listener.onSuccess(requestParams, object);
         } else {
-            listener.onSuccess(requestParams,jsonObject);
+            listener.onSuccess(requestParams, jsonObject);
         }
     }
 
     /**
      * 请求错误 没有数据
+     *
      * @param requestParams 请求参数
-     * @param jsonObject json数据
+     * @param jsonObject    json数据
      */
-    private void requestSuccessNoDataError(RequestParams requestParams,JSONObject jsonObject) {
+    private void requestSuccessNoDataError(RequestParams requestParams, JSONObject jsonObject) {
         if ("".equals(jsonObject.optString("msg"))) {
-            listener.onFailed(requestParams,Contants.NODATA);
+            listener.onFailed(requestParams, Contants.NODATA);
         } else {
-            listener.onFailed(requestParams,jsonObject.optString("msg"));
+            listener.onFailed(requestParams, jsonObject.optString("msg"));
         }
     }
 
@@ -169,7 +180,6 @@ public class HttpHelper {
     /**
      * 利用AsyncTask 实现异步网络请求 HttpURLConnection
      */
-    @SuppressLint("StaticFieldLeak")
     public class HttpAsyncTaskTest extends AsyncTask<Object, Integer, Object> {
 
         // 方法1：onPreExecute（）
@@ -229,7 +239,7 @@ public class HttpHelper {
 
         @Override
         protected void onPostExecute(Object object) {
-            listener.onSuccess(null,object);
+            listener.onSuccess(null, object);
         }
 
         // 方法5：onCancelled()

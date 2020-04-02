@@ -1,7 +1,6 @@
 package com.bh.ldp.myhuiapplication.caipu
 
 import android.text.TextUtils
-import android.view.TextureView
 import androidx.recyclerview.widget.LinearLayoutManager
 import bean.CaiDetailsBean
 import bean.CaiPuBean
@@ -95,8 +94,8 @@ class CaiPuActivity : BaseActivity<CaiPuPresenter>(), CaiPuContract.View {
 
     override fun success(bean: CaiPuBean, requestParams: RequestParams) {
         this.tag = requestParams.tag as String
-        refreshLayout.finishRefresh(2_000)
-        refreshLayout.finishLoadMore(2_000)
+        refreshLayout.finishRefresh(500)
+        refreshLayout.finishLoadMore(500)
         hideProgressDialog()
 
         loadData(bean)

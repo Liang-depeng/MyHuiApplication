@@ -46,7 +46,7 @@ public class TrainDetailBean {
     private String typename;
     private Object priceyd;
     private Object priceed;
-    private int pricesw;
+    private Object pricesw;
     private Object pricetd;
     private Object pricegr1;
     private Object pricegr2;
@@ -152,8 +152,8 @@ public class TrainDetailBean {
         this.typename = typename;
     }
 
-    public Object getPriceyd() {
-        return priceyd;
+    public String getPriceyd() {
+        return ((String) priceyd);
     }
 
     public void setPriceyd(Object priceyd) {
@@ -168,8 +168,8 @@ public class TrainDetailBean {
         this.priceed = priceed;
     }
 
-    public int getPricesw() {
-        return pricesw;
+    public String getPricesw() {
+        return String.valueOf(pricesw);
     }
 
     public void setPricesw(int pricesw) {

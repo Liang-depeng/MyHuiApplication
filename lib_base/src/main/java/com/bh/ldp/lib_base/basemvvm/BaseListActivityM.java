@@ -1,4 +1,4 @@
-package com.bh.ldp.lib_base.basev;
+package com.bh.ldp.lib_base.basemvvm;
 
 import android.content.Context;
 import android.view.View;
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bh.ldp.lib_base.R;
+import com.bh.ldp.lib_base.basev.SmartRefreshListener;
 import com.bh.ldp.lib_base.view.BaseRecyclerViewAdapter;
 import com.bh.ldp.lib_base.view.RecyclerViewHolder;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -23,7 +24,7 @@ import java.util.List;
  * @author mini
  * @date 2019/10/17
  */
-public abstract class BaseListActivity<T,E extends BasePresenter> extends BaseActivity<E> implements SmartRefreshListener {
+public abstract class BaseListActivityM<T> extends BaseActivityM implements SmartRefreshListener {
 
     private List<T> mList = new ArrayList<>();
     private int currentPage = 1;
@@ -50,13 +51,13 @@ public abstract class BaseListActivity<T,E extends BasePresenter> extends BaseAc
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 currentPage = 1;
-                BaseListActivity.this.onRefresh();
+                BaseListActivityM.this.onRefresh();
             }
         });
         mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                BaseListActivity.this.onLoadMore();
+                BaseListActivityM.this.onLoadMore();
             }
         });
     }

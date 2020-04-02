@@ -11,6 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -35,7 +36,14 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.android.material:material:1.1.0-beta01'
 
+    implementation 'androidx.multidex:multidex:2.0.1'
+
     implementation rootProject.ext.dependencies.glide
     implementation rootProject.ext.dependencies.smartRefreshLayout
     implementation rootProject.ext.dependencies.smartRefreshHeader
+
+    implementation rootProject.ext.dependencies.lifecycleextensions
+    implementation rootProject.ext.dependencies.viewmodel
+    implementation rootProject.ext.dependencies.livedata
+    implementation rootProject.ext.dependencies.richtext
 }

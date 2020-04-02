@@ -3,16 +3,17 @@ package com.bh.ldp.lib_base.view;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.StringRes;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bh.ldp.lib_base.R;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-
-import androidx.annotation.StringRes;
 
 /**
  * created by Da Peng at 2019/7/30
@@ -228,9 +229,26 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
+    public RecyclerViewHolder setImagineByNetUrl(Context context, int viewId, String netResUrl) {
+        ImageView imageView = getView(viewId);
+        glideToImagine(context, imageView, netResUrl);
+        return this;
+    }
+
     private void glideToImagine(Context context, ImageView image, String netResUrl, int placeholder) {
         RequestOptions requestOptions = new RequestOptions()
                 .placeholder(placeholder);
+        //      .error(errorImagineId)    , int errorImagineId
+
+        Glide.with(context)
+                .load(netResUrl)
+                .apply(requestOptions)
+                .into(image);
+    }
+
+    private void glideToImagine(Context context, ImageView image, String netResUrl) {
+        RequestOptions requestOptions = new RequestOptions()
+                .placeholder(R.mipmap.ic_load_failed_1);
         //      .error(errorImagineId)    , int errorImagineId
 
         Glide.with(context)

@@ -3,16 +3,11 @@ package com.bh.ldp.myhuiapplication.caipu;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.bh.ldp.lib_base.view.BaseRecyclerViewAdapter;
 import com.bh.ldp.lib_base.view.RecyclerViewHolder;
-import com.bh.ldp.lib_base.view.onMyClickListener;
-import com.bh.ldp.myhuiapplication.MyApplication;
 import com.bh.ldp.myhuiapplication.R;
 import com.bh.ldp.myhuiapplication.details.CaiDetailsActivity;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -36,7 +31,7 @@ public class CaiPuAdapter extends BaseRecyclerViewAdapter<CaiDetailsBean> {
     @Override
     protected void bindItemViewHolder(RecyclerViewHolder holder, int position, final CaiDetailsBean item) {
 
-        holder.setImagineByNetUrl(content, R.id.cai_iv, item.getPic(), R.drawable.ic_launcher_background)
+        holder.setImagineByNetUrl(content, R.id.cai_iv, item.getPic())
                 .setText(R.id.cai_name, item.getName())
                 .setText(R.id.cai_tag, item.getTag());
 
@@ -50,5 +45,55 @@ public class CaiPuAdapter extends BaseRecyclerViewAdapter<CaiDetailsBean> {
 
     }
 
+}
 
+
+class Person {
+
+    private static Person person;
+
+    private Person() {
+    }
+
+    public static Person getInstance() {
+
+        if (person == null) {
+
+            synchronized (Person.class) {
+                if (person == null) {
+                    person = new Person();
+                }
+            }
+
+        }
+
+        return person;
+    }
+
+    public static Person getInstance2() {
+        return Instance.sInstance;
+    }
+
+    public static Person getInstance3() {
+        return InsTanceEnum.INSTANCE.getPerson();
+    }
+
+    private static class Instance {
+        private static final Person sInstance = new Person();
+    }
+
+    private enum InsTanceEnum {
+        INSTANCE;
+
+        private Person person;
+
+        InsTanceEnum() {
+            person = new Person();
+        }
+
+        public Person getPerson() {
+            return person;
+        }
+
+    }
 }

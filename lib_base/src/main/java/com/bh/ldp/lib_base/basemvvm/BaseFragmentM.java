@@ -1,4 +1,4 @@
-package com.bh.ldp.lib_base.basev;
+package com.bh.ldp.lib_base.basemvvm;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -13,12 +13,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bh.ldp.lib_base.R;
+import com.bh.ldp.lib_base.basev.BaseView;
 
 
 /**
  * created by Da Peng at 2019/6/21
  */
-public abstract class BaseFragment extends Fragment implements BaseView {
+public abstract class BaseFragmentM extends Fragment implements BaseView {
 
     private ProgressDialog mProgressDialog;
     private View contentView;

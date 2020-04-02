@@ -1,11 +1,8 @@
 package com.bh.ldp.myhuiapplication.details
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.view.LayoutInflater
 import bean.CaiDetailsBean
 import com.bh.ldp.lib_base.basev.BaseActivity
-import com.bh.ldp.lib_base.basev.BasePresenter
 import com.bh.ldp.lib_base.utils.ViewUtils
 import com.bh.ldp.myhuiapplication.R
 import com.bumptech.glide.Glide
@@ -33,7 +30,10 @@ class CaiDetailsActivity : BaseActivity<CaiDetailsPresenter>() {
         //解决lisview嵌套问题
         ViewUtils.setListViewHeightBasedOnChildren(headView.headListView)
         listView.addHeaderView(headView)
-        Glide.with(this).load(data?.pic).into(headView.cai_details_iv)
+        Glide.with(this)
+                .load(data?.pic)
+                .placeholder(R.mipmap.ic_load_failed_1)
+                .into(headView.cai_details_iv)
         listView.adapter = caiPuProcessAdapter
 
         eat_num.text = data?.peoplenum

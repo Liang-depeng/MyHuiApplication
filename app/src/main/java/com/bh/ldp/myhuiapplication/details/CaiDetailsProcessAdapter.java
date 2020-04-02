@@ -24,8 +24,8 @@ public class CaiDetailsProcessAdapter extends MyBaseAdapter<CaiDetailsBean.Proce
 
     @Override
     protected void bindView(ViewHolder viewHolder, CaiDetailsBean.ProcessBean item, int position, View convertView, ViewGroup parent) {
-        viewHolder.setText(R.id.process_tv, item.getPcontent())
-                .setImagineByNetUrl(mContext, R.id.process_iv, item.getPic(), R.drawable.ic_launcher_background);
+        viewHolder.setText(R.id.process_tv, "步骤" + (position+1) + ": "+item.getPcontent())
+                .setImagineByNetUrl(mContext, R.id.process_iv, item.getPic());
     }
 
     @Override

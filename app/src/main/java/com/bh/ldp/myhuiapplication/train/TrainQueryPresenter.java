@@ -1,12 +1,13 @@
 package com.bh.ldp.myhuiapplication.train;
 
+import androidx.annotation.NonNull;
+
 import com.bh.ldp.lib_base.basev.BasePresenter;
 import com.bh.ldp.lib_base.http.HttpHelper;
 import com.bh.ldp.lib_base.http.HttpUrl;
 import com.bh.ldp.lib_base.http.OnHttpResponseListner;
 import com.bh.ldp.lib_base.http.RequestParams;
 
-import androidx.annotation.NonNull;
 import bean.TrainBean;
 
 /**
@@ -15,10 +16,11 @@ import bean.TrainBean;
  */
 public class TrainQueryPresenter extends BasePresenter<TrainQueryContract.View> implements TrainQueryContract.Presenter, OnHttpResponseListner {
 
-    private HttpHelper mHttpHelper = new HttpHelper(this);
+    private HttpHelper mHttpHelper = HttpHelper.getInstance();
 
     public TrainQueryPresenter(TrainQueryContract.View mView) {
         super(mView);
+        mHttpHelper.setCallBack(this);
     }
 
     @Override
